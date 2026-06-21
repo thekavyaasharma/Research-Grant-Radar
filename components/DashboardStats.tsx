@@ -15,33 +15,41 @@ export default function DashboardStats({
     {
       title: "Total Grants",
       value: totalGrants,
+      valueColor: "text-slate-900",
+      icon: "Total",
     },
     {
       title: "Open Grants",
       value: openGrants,
+      valueColor: "text-emerald-600",
+      icon: "Open",
     },
     {
       title: "Closing Soon",
       value: closingSoon,
+      valueColor: "text-amber-500",
+      icon: "Soon",
     },
     {
       title: "Agencies",
       value: agencies,
+      valueColor: "text-blue-600",
+      icon: "Org",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
       {cards.map((card) => (
         <div
           key={card.title}
-          className="rounded-3xl border border-slate-800 bg-slate-900 p-6"
+          className="rounded-2xl border border-slate-200 bg-white p-5"
         >
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-400 text-xs font-semibold tracking-widest uppercase">
             {card.title}
           </p>
 
-          <h3 className="text-4xl font-bold mt-3">
+          <h3 className={`text-4xl font-bold mt-3 ${card.valueColor}`}>
             {card.value}
           </h3>
         </div>

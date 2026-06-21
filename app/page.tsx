@@ -34,42 +34,58 @@ export default async function Home() {
   const agencies =
     new Set(grants?.map((g) => g.agency)).size || 0;
 
+  const syncedAt = new Date().toLocaleTimeString("en-IN", { hour12: false });
+
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main
+      className="min-h-screen text-slate-900"
+      style={{
+        backgroundColor: "#f8fafc",
+        backgroundImage:
+          "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
+        backgroundSize: "32px 32px",
+      }}
+    >
       <div className="max-w-[1600px] mx-auto px-8 py-8">
 
-        {/* Header */}
+        {/* Top eyebrow badge */}
+        <div className="flex items-center gap-2 mb-4">
+          <div className="w-7 h-7 rounded-md bg-slate-900 flex items-center justify-center text-white text-xs">
+            RGR
+          </div>
+          <span className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
+            India / Research Funding Intelligence
+          </span>
+        </div>
 
-        <div className="flex justify-between items-center mb-8">
+        {/* Header */}
+        <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-5xl font-extrabold tracking-tight text-slate-900">
               Research Grant Radar
             </h1>
 
-            <p className="text-slate-400 mt-2">
-              Real-time funding opportunities
+            <p className="text-slate-500 mt-3 max-w-2xl">
+              Live view of open, upcoming and recently closed schemes
+              across leading Indian government agencies, PSUs and
+              philanthropic trusts.
             </p>
           </div>
 
-          
-        </div>
-
-        {/* Welcome Banner */}
-
-        <div className="mb-8 rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-900 to-slate-950 p-8">
-          <h2 className="text-3xl font-bold mb-2">
-            Welcome back 👋
-          </h2>
-
-          <p className="text-slate-400">
-            Track funding opportunities from Indian
-            government agencies, research councils,
-            universities and innovation programs.
-          </p>
+          <div className="flex items-center gap-3">
+            <div className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs">
+              <div className="flex items-center gap-1.5 text-slate-500 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                LIVE · AUTO-REFRESH 
+              </div>
+              <div className="text-slate-400 mt-0.5">
+                synced {syncedAt}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Stats */}
-
         <DashboardStats
           totalGrants={totalGrants}
           openGrants={openGrants}
@@ -78,8 +94,7 @@ export default async function Home() {
         />
 
         {/* Table */}
-
-        <div className="mt-8">
+        <div className="mt-6">
           <GrantTable grants={grants || []} />
         </div>
 

@@ -10,7 +10,6 @@ type Grant = {
   scheme: string;
   focusArea: string;
   fundingType: string;
-  fundingAmount: string;
   country: string;
   openingDate: string;
   closingDate: string;
@@ -38,10 +37,7 @@ export default function GrantTable({
     [grants]
   );
 
-  const statuses = useMemo(
-    () => Array.from(new Set(grants.map((g) => g.status))).filter(Boolean),
-    [grants]
-  );
+  const statuses = ["Open", "Closed"];
 
   const filtered = grants.filter((grant) => {
     const matchesSearch = `${grant.agency} ${grant.scheme} ${grant.focusArea}`
@@ -51,8 +47,10 @@ export default function GrantTable({
     const matchesAgency = agencyFilter === "All" || grant.agency === agencyFilter;
     const matchesFundingType =
       fundingTypeFilter === "All" || grant.fundingType === fundingTypeFilter;
-    const matchesStatus = statusFilter === "All" || grant.status === statusFilter;
-
+    const matchesStatus =
+      statusFilter === "All" ||
+      (statusFilter === "Open" && grant.status?.toLowerCase() === "open") ||
+      (statusFilter === "Closed" && grant.status?.toLowerCase() !== "open");
     return matchesSearch && matchesAgency && matchesFundingType && matchesStatus;
   });
 
@@ -213,17 +211,13 @@ export default function GrantTable({
                     className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
                       grant.status?.toLowerCase() === "open"
                         ? "bg-emerald-50 text-emerald-600"
-                        : grant.status?.toLowerCase() === "upcoming"
-                        ? "bg-blue-50 text-blue-600"
-                        : "bg-slate-100 text-slate-500"
+                        : "bg-red-50 text-red-600"
                     }`}>
                     <span
                       className={`w-1.5 h-1.5 rounded-full ${
                         grant.status?.toLowerCase() === "open"
-                          ? "bg-emerald-500"
-                          : grant.status?.toLowerCase() === "upcoming"
-                          ? "bg-blue-500"
-                          : "bg-slate-400"
+                          ? "bg-emerald-500 animate-blink"
+                          : "bg-red-500"
                       }`}/>
                     {grant.status}
                   </span>

@@ -9,12 +9,11 @@ type Grant = {
   agencyType: string;
   scheme: string;
   focusArea: string;
-  fundingType: string;
-  country: string;
   openingDate: string;
   closingDate: string;
   status: string;
   website: string;
+  applicationLink: string;
 };
 
 export default function GrantTable({
@@ -24,16 +23,10 @@ export default function GrantTable({
 }) {
   const [search, setSearch] = useState("");
   const [agencyFilter, setAgencyFilter] = useState("All");
-  const [fundingTypeFilter, setFundingTypeFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
 
   const agencies = useMemo(
     () => Array.from(new Set(grants.map((g) => g.agency))).filter(Boolean),
-    [grants]
-  );
-
-  const fundingTypes = useMemo(
-    () => Array.from(new Set(grants.map((g) => g.fundingType))).filter(Boolean),
     [grants]
   );
 
@@ -45,19 +38,17 @@ export default function GrantTable({
       .includes(search.toLowerCase());
 
     const matchesAgency = agencyFilter === "All" || grant.agency === agencyFilter;
-    const matchesFundingType =
-      fundingTypeFilter === "All" || grant.fundingType === fundingTypeFilter;
+
     const matchesStatus =
       statusFilter === "All" ||
       (statusFilter === "Open" && grant.status?.toLowerCase() === "open") ||
       (statusFilter === "Closed" && grant.status?.toLowerCase() !== "open");
-    return matchesSearch && matchesAgency && matchesFundingType && matchesStatus;
+    return matchesSearch && matchesAgency && matchesStatus;
   });
 
   const resetFilters = () => {
     setSearch("");
     setAgencyFilter("All");
-    setFundingTypeFilter("All");
     setStatusFilter("All");
   };
 
@@ -87,18 +78,6 @@ export default function GrantTable({
           {agencies.map((a) => (
             <option key={a} value={a}>
               {a}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={fundingTypeFilter}
-          onChange={(e) => setFundingTypeFilter(e.target.value)}
-          className="bg-white border border-slate-300 rounded-xl py-2.5 px-3 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-300">
-          <option value="All">All funding types</option>
-          {fundingTypes.map((f) => (
-            <option key={f} value={f}>
-              {f}
             </option>
           ))}
         </select>
@@ -144,12 +123,6 @@ export default function GrantTable({
                 Focus Area
               </th>
               <th className="text-left p-4 font-semibold text-slate-500 text-xs uppercase tracking-wide">
-                Funding Type
-              </th>
-              <th className="text-left p-4 font-semibold text-slate-500 text-xs uppercase tracking-wide">
-                Country
-              </th>
-              <th className="text-left p-4 font-semibold text-slate-500 text-xs uppercase tracking-wide">
                 Opening Date
               </th>
               <th className="text-left p-4 font-semibold text-slate-500 text-xs uppercase tracking-wide">
@@ -160,6 +133,9 @@ export default function GrantTable({
               </th>
               <th className="text-left p-4 font-semibold text-slate-500 text-xs uppercase tracking-wide">
                 Website
+              </th>
+              <th className="text-left p-4 font-semibold text-slate-500 text-xs uppercase tracking-wide">
+                Application Link
               </th>
             </tr>
 
@@ -188,16 +164,6 @@ export default function GrantTable({
                   {grant.focusArea || "General"}
                 </td>
 
-                <td className="p-4">
-                  <span className="px-2.5 py-1 rounded-md text-xs font-medium border border-slate-200 text-slate-600 uppercase tracking-wide">
-                    {grant.fundingType || "Grant"}
-                  </span>
-                </td>
-
-                <td className="p-4 text-slate-600">
-                  {grant.country || "India"}
-                </td>
-
                 <td className="p-4 text-slate-500">
                   {grant.openingDate}
                 </td>
@@ -224,21 +190,37 @@ export default function GrantTable({
                 </td>
 
                 <td className="p-4">
-                      {grant.website ? (
-                        <a
-                          href={grant.website.trim()}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium"
-                        >
-                          Visit
-                          <ExternalLink size={13} />
-                       </a>
-                      ) : (
-                      <span className="text-slate-400">N/A</span>
-                    )}
-                  </td>
-                
+                  {grant.website ? (
+                    <a
+                      href={grant.website.trim()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Visit
+                      <ExternalLink size={13} />
+                    </a>
+                  ) : (
+                    <span className="text-slate-400">N/A</span>
+                  )}
+                </td>
+
+                <td className="p-4">
+                  {grant.applicationLink ? (
+                    <a
+                      href={grant.applicationLink.trim()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Apply
+                      <ExternalLink size={13} />
+                    </a>
+                  ) : (
+                    <span className="text-slate-400">N/A</span>
+                  )}
+                </td>
+
               </tr>
 
             ))}

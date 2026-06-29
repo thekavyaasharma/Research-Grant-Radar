@@ -12,7 +12,7 @@
 
 ---
 
-## 🌟 Overview
+##  Overview
 
 Research funding opportunities in India are fragmented across government ministries, research councils, public sector organizations, CSR initiatives, and philanthropic foundations. Each organization publishes opportunities independently, often using different formats, update cycles, and communication channels.
 
@@ -24,7 +24,7 @@ Every grant listing is linked directly to its official source, ensuring transpar
 
 ---
 
-## 🎯 Problem Statement
+##  Problem Statement
 
 During my internship at **CSIR-CSIO**, I observed that researchers often had to:
 
@@ -40,7 +40,7 @@ Research Grant Radar was built to eliminate this friction.
 
 ---
 
-## 💡 Solution
+##  Solution
 
 Research Grant Radar acts as a centralized funding intelligence layer by:
 
@@ -69,9 +69,9 @@ The result is a significantly faster and more reliable grant discovery experienc
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 🔍 Intelligent Search
+###  Intelligent Search
 
 Search funding opportunities using:
 
@@ -83,7 +83,7 @@ Search funding opportunities using:
 
 ---
 
-### 🎛 Advanced Filtering
+###  Advanced Filtering
 
 Filter grants by:
 
@@ -128,7 +128,7 @@ ensuring complete transparency and traceability.
 
 ---
 
-### 📱 Responsive Experience
+###  Responsive Experience
 
 Fully optimized for:
 
@@ -138,7 +138,7 @@ Fully optimized for:
 
 ---
 
-## 🏛 Agencies Covered
+##  Agencies Covered
 
 ### Government & Research Organizations
 
@@ -165,7 +165,7 @@ and additional funding organizations.
 
 ---
 
-## 🏗 System Architecture
+##  System Architecture
 
 ```text
                       ┌─────────────────────┐
@@ -224,7 +224,7 @@ and additional funding organizations.
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 Research-Grant-Radar
@@ -398,13 +398,13 @@ https://research-grant-radar.vercel.app/
 
 ---
 
-## 📦 Repository
+##  Repository
 
 https://github.com/thekavyaasharma/Research-Grant-Radar
 
 ---
 
-## 👩‍💻 Developer
+## Developer
 
 ### Kavya Sharma
 

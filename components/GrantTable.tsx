@@ -30,7 +30,7 @@ export default function GrantTable({
     [grants]
   );
 
-  const statuses = ["Open", "Closed"];
+  const statuses = ["Open", "Closed", "Open - Rolling"];
 
   const filtered = grants.filter((grant) => {
     const matchesSearch = `${grant.agency} ${grant.scheme} ${grant.focusArea}`
@@ -42,6 +42,7 @@ export default function GrantTable({
     const matchesStatus =
       statusFilter === "All" ||
       (statusFilter === "Open" && grant.status?.toLowerCase() === "open") ||
+      (statusFilter === "Open - Rolling" && grant.status?.toLowerCase() === "open - rolling") ||
       (statusFilter === "Closed" && grant.status?.toLowerCase() !== "open");
     return matchesSearch && matchesAgency && matchesStatus;
   });

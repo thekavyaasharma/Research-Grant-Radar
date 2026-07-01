@@ -43,7 +43,7 @@ export default function GrantTable({
       statusFilter === "All" ||
       (statusFilter === "Open" && grant.status?.toLowerCase() === "open") ||
       (statusFilter === "Open - Rolling" && grant.status?.toLowerCase() === "open - rolling") ||
-      (statusFilter === "Closed" && grant.status?.toLowerCase() !== "open");
+      (statusFilter === "Closed" && grant.status?.toLowerCase() === "closed");
     return matchesSearch && matchesAgency && matchesStatus;
   });
 

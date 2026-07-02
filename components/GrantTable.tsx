@@ -52,6 +52,7 @@ export default function GrantTable({
     setAgencyFilter("All");
     setStatusFilter("All");
   };
+  
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">

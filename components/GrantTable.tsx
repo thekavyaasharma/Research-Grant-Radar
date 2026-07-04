@@ -47,6 +47,8 @@ export default function GrantTable({
     return matchesSearch && matchesAgency && matchesStatus;
   });
 
+
+
   const resetFilters = () => {
     setSearch("");
     setAgencyFilter("All");

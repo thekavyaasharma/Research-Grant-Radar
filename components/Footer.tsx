@@ -160,9 +160,9 @@ export default function Footer({ totalGrants, agencyCount }: FooterProps) {
           </p>
           <p className="text-xs text-slate-500">
             Built by{" "}
-            <span className="text-slate-300">Kavya Sharma</span> during
+            <span className="text-slate-300">Kavya Sharma</span> During
             Internship, under the guidance of Chief Scientist at
-            CSIR-CSIO: <span className="text-slate-300">V D Shivling</span>
+            CSIR-CSIO: <span className="text-slate-300">DR. VD Shivling</span>
           </p>
         </div>
       </div>

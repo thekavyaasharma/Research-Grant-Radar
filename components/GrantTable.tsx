@@ -205,7 +205,9 @@ export default function GrantTable({
                       <ExternalLink size={13} />
                     </a>
                   ) : (
+
                     <span className="text-slate-400">N/A</span>
+                    
                   )}
                 </td>
 

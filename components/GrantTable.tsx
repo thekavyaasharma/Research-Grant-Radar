@@ -16,14 +16,29 @@ type Grant = {
   applicationLink: string;
 };
 
+type Props = {
+  grants: Grant[];
+  // Optional controlled filter — pass these from a parent (e.g. page.tsx)
+  // if you want DashboardStats cards to drive this table's status filter.
+  // If omitted, GrantTable manages its own internal filter state as before.
+  statusFilter?: string;
+  onStatusFilterChange?: (status: string) => void;
+};
+
 export default function GrantTable({
   grants,
-}: {
-  grants: Grant[];
-}) {
+  statusFilter: controlledStatusFilter,
+  onStatusFilterChange,
+}: Props) {
   const [search, setSearch] = useState("");
   const [agencyFilter, setAgencyFilter] = useState("All");
-  const [statusFilter, setStatusFilter] = useState("All");
+  const [internalStatusFilter, setInternalStatusFilter] = useState("All");
+
+  // Use the controlled value if the parent provided one, otherwise fall back
+  // to internal state so this component still works standalone.
+  const isControlled = controlledStatusFilter !== undefined && !!onStatusFilterChange;
+  const statusFilter = isControlled ? controlledStatusFilter! : internalStatusFilter;
+  const setStatusFilter = isControlled ? onStatusFilterChange! : setInternalStatusFilter;
 
   const agencies = useMemo(
     () => Array.from(new Set(grants.map((g) => g.agency))).filter(Boolean),

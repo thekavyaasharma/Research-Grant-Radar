@@ -1,6 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import GrantTable from "@/components/GrantTable";
-import DashboardStats from "@/components/DashboardStats";
+import DashboardClient from "@/components/DashboardClient";
 
 export const revalidate = 86400;
 
@@ -15,6 +14,11 @@ export default async function Home() {
   const openGrants =
     grants?.filter(
       (g) => g.status?.toLowerCase() === "open"
+    ).length || 0;
+
+  const closedGrants =
+    grants?.filter(
+      (g) => g.status?.toLowerCase() === "closed"
     ).length || 0;
 
   const closingSoon =
@@ -85,18 +89,14 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Stats */}
-        <DashboardStats
+        <DashboardClient
+          grants={grants || []}
           totalGrants={totalGrants}
           openGrants={openGrants}
           closingSoon={closingSoon}
+          closedGrants={closedGrants}
           agencies={agencies}
         />
-
-        {/* Table */}
-        <div className="mt-6">
-          <GrantTable grants={grants || []} />
-        </div>
 
       </div>
     </main>

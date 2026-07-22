@@ -45,7 +45,7 @@ export default function Footer({ totalGrants, agencyCount }: FooterProps) {
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
           </span>
           <span className="text-xs font-mono tracking-wide text-slate-400">
-            {agencyCount ?? 15} agencies tracked · {totalGrants ?? 34} grants indexed · synced daily
+            {agencyCount ?? 15} agencies tracked · {totalGrants ?? 37} grants indexed · synced daily
           </span>
         </div>
 

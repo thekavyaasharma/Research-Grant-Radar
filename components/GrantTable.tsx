@@ -47,14 +47,11 @@ export default function GrantTable({
     return matchesSearch && matchesAgency && matchesStatus;
   });
 
-
-
   const resetFilters = () => {
     setSearch("");
     setAgencyFilter("All");
     setStatusFilter("All");
   };
-  
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
@@ -104,6 +101,22 @@ export default function GrantTable({
           <X size={14} />
           Reset
         </button>
+      </div>
+
+      {/* Status Legend */}
+      <div className="px-5 py-2.5 border-b border-slate-200 flex flex-wrap gap-4 text-xs text-slate-500 bg-slate-50/50">
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-blink" />
+          Open — accepting applications
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-blink" />
+          Open - Rolling — accepts applications continuously
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+          Closed — not currently accepting applications
+        </div>
       </div>
 
       {/* Table */}
@@ -177,20 +190,38 @@ export default function GrantTable({
                 </td>
 
                 <td className="p-4">
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
-                      grant.status?.toLowerCase() === "open"
-                        ? "bg-emerald-50 text-emerald-600"
-                        : "bg-red-50 text-red-600"
-                    }`}>
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full ${
-                        grant.status?.toLowerCase() === "open"
-                          ? "bg-emerald-500 animate-blink"
-                          : "bg-red-500"
-                      }`}/>
-                    {grant.status}
-                  </span>
+                  {(() => {
+                    const s = grant.status?.toLowerCase();
+                    const isOpen = s === "open";
+                    const isRolling = s === "open - rolling";
+
+                    const badgeClass = isOpen
+                      ? "bg-emerald-50 text-emerald-600"
+                      : isRolling
+                      ? "bg-amber-50 text-amber-600"
+                      : "bg-red-50 text-red-600";
+
+                    const dotClass = isOpen
+                      ? "bg-emerald-500 animate-blink"
+                      : isRolling
+                      ? "bg-amber-500 animate-blink"
+                      : "bg-red-500";
+
+                    const statusLabel = isOpen
+                      ? "Accepting applications"
+                      : isRolling
+                      ? "Accepts applications continuously"
+                      : "Not currently accepting applications";
+
+                    return (
+                      <span
+                        title={statusLabel}
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${badgeClass}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${dotClass}`} />
+                        {grant.status}
+                      </span>
+                    );
+                  })()}
                 </td>
 
                 <td className="p-4">

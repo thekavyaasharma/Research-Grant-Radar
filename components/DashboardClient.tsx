@@ -21,7 +21,6 @@ type Props = {
   grants: Grant[];
   totalGrants: number;
   openGrants: number;
-  closingSoon: number;
   closedGrants: number;
   agencies: number;
 };
@@ -30,7 +29,7 @@ export default function DashboardClient({
   grants,
   totalGrants,
   openGrants,
-  closingSoon,
+  
   closedGrants,
   agencies,
 }: Props) {
@@ -42,7 +41,6 @@ export default function DashboardClient({
       <DashboardStats
         totalGrants={totalGrants}
         openGrants={openGrants}
-        closingSoon={closingSoon}
         closedGrants={closedGrants}
         agencies={agencies}
         activeFilter={statusFilter}

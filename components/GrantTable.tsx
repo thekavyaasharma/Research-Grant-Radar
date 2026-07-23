@@ -55,6 +55,7 @@ export default function GrantTable({
 
     const matchesAgency = agencyFilter === "All" || grant.agency === agencyFilter;
 
+    
     const matchesStatus =
       statusFilter === "All" ||
       (statusFilter === "Open" && grant.status?.toLowerCase() === "open") ||

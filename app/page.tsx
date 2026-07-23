@@ -93,7 +93,6 @@ export default async function Home() {
           grants={grants || []}
           totalGrants={totalGrants}
           openGrants={openGrants}
-          closingSoon={closingSoon}
           closedGrants={closedGrants}
           agencies={agencies}
         />

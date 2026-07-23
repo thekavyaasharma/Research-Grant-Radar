@@ -1,7 +1,6 @@
 type Props = {
   totalGrants: number;
   openGrants: number;
-  closingSoon: number;
   closedGrants: number;
   agencies: number;
   activeFilter?: string;
@@ -11,7 +10,6 @@ type Props = {
 export default function DashboardStats({
   totalGrants,
   openGrants,
-  closingSoon,
   closedGrants,
   agencies,
   activeFilter = "All",
@@ -31,13 +29,6 @@ export default function DashboardStats({
       valueColor: "text-emerald-600",
       icon: "Open",
       filterValue: "Open",
-    },
-    {
-      title: "Closing Soon",
-      value: closingSoon,
-      valueColor: "text-amber-500",
-      icon: "Soon",
-      filterValue: null, // date-based, not a status filter — see note below
     },
     {
       title: "Closed Grants",
